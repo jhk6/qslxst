@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>菜单 · 柳巷食堂</title>
+<style>
+  :root{
+    --wood:#3a1d0f;--wood2:#5a2e14;--red:#a8331f;--red2:#c94a2a;
+    --gold:#d4a24a;--gold2:#f0c878;--cream:#f6ecd9;--ink:#2a1810;--muted:#8a7156;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--cream);color:var(--ink);line-height:1.7;font-size:14px}
+  a{color:inherit;text-decoration:none}
+
+  .woodbar{background:linear-gradient(180deg,var(--wood),var(--wood2));
+    color:var(--gold2);font-size:12px;padding:6px 0;border-bottom:2px solid var(--gold)}
+  .woodbar .inner{max-width:1140px;margin:0 auto;padding:0 20px;
+    display:flex;justify-content:space-between;align-items:center}
+  .woodbar a{color:var(--gold2);margin-left:16px;transition:.2s}
+  .woodbar a:hover{color:#fff}
+
+  header{background:
+      radial-gradient(ellipse at 20% -20%, rgba(201,74,42,.35), transparent 60%),
+      linear-gradient(135deg,#5a2e14 0%,#3a1d0f 60%,#2a1810 100%);
+    color:var(--cream);padding:26px 0 22px;
+    border-bottom:3px solid var(--gold);position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(212,162,74,.08) 1px,transparent 1px);
+    background-size:18px 18px;pointer-events:none}
+  .header-inner{max-width:1140px;margin:0 auto;padding:0 20px;
+    display:flex;align-items:center;gap:18px;position:relative;z-index:2}
+  .logo{width:56px;height:56px;flex-shrink:0;border-radius:50%;
+    background:radial-gradient(circle at 50% 40%,var(--gold2),var(--gold) 60%,#8a6a20 100%);
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+    box-shadow:0 0 0 3px rgba(212,162,74,.18)}
+  .title-block h1{font-family:"Songti SC","STSong",serif;
+    font-size:26px;letter-spacing:5px;color:#fff}
+  .title-block .sub{font-size:11px;letter-spacing:3px;color:var(--gold2);margin-top:4px}
+
+  nav{background:var(--wood);border-bottom:1px solid rgba(212,162,74,.2);
+    position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+  nav .inner{max-width:1140px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap}
+  nav a{color:rgba(246,236,217,.8);padding:16px 28px;font-size:15px;position:relative;transition:.2s;letter-spacing:1px}
+  nav a:hover{background:var(--wood2);color:#fff}
+  nav a.active{color:var(--gold2);font-weight:600}
+  nav a.active::after{content:"";position:absolute;left:28px;right:28px;bottom:0;height:3px;background:var(--gold)}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 20px 60px}
+  .crumb{font-size:12px;color:var(--muted);margin-bottom:20px}
+  .crumb a:hover{color:var(--red)}
+
+  .head-title{text-align:center;margin-bottom:40px}
+  .head-title h2{font-family:"Songti SC","STSong",serif;font-size:32px;
+    letter-spacing:12px;color:var(--ink);text-indent:12px}
+  .head-title .sub{margin-top:10px;font-size:12px;letter-spacing:6px;color:var(--muted)}
+  .head-title .line{width:60px;height:2px;background:var(--gold);margin:16px auto 0}
+
+  .cat{margin-bottom:44px}
+  .cat h3{font-size:20px;color:var(--red);letter-spacing:3px;
+    padding-bottom:10px;border-bottom:2px solid var(--gold);
+    margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .cat h3::before{content:"";width:6px;height:20px;background:var(--red);border-radius:2px}
+
+  /* ===== 菜品行 ===== */
+  .item{
+    display:flex;align-items:baseline;
+    padding:14px 4px;
+    border-bottom:1px dashed rgba(138,113,86,.25);
+    gap:12px;
+    position:relative;
+    padding-right:130px;   /* 给最右侧 base64 留空 */
+  }
+  .item:last-child{border-bottom:none}
+  .item-name{font-size:15.5px;color:var(--ink);font-weight:600;flex-shrink:0}
+  .item-desc{font-size:13px;color:var(--muted);flex:1;padding-left:8px}
+  .item-dots{flex:1;border-bottom:1px dotted rgba(138,113,86,.4);margin:0 6px;transform:translateY(-3px)}
+
+  /* 价格严格右对齐 */
+  .item-price{
+    font-family:Consolas,monospace;font-size:16px;
+    color:var(--red);font-weight:700;flex-shrink:0;
+    width:46px;text-align:right;
+  }
+  .item-price::before{content:"¥";font-size:13px;margin-right:2px}
+
+  /* ===== base64 段 03 · 隐蔽样式 ===== */
+  .item .tiny-note{
+    position:absolute;
+    right:4px;
+    top:50%;
+    transform:translateY(-50%);
+    font-family:Consolas,"Courier New",monospace;
+    font-size:10px;
+    color:#c9b48a;         /* 更浅的金 */
+    letter-spacing:1px;
+    opacity:.42;            /* 更淡 */
+    user-select:all;
+    transition:opacity .3s ease;
+    pointer-events:auto;
+  }
+  .item .tiny-note:hover{
+    opacity:.9;
+    color:#b89a5a;
+  }
+
+  footer{background:var(--wood);color:rgba(246,236,217,.55);
+    font-size:12px;padding:30px 0 22px;border-top:3px solid var(--gold);margin-top:20px}
+  .footer-inner{max-width:1140px;margin:0 auto;padding:0 20px;text-align:center;line-height:2}
+  .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+  .footer-links a{color:rgba(246,236,217,.55)}
+  .footer-links a:hover{color:var(--gold2)}
+
+  @media (max-width:520px){
+    .head-title h2{font-size:24px;letter-spacing:6px;text-indent:6px}
+    nav a{padding:14px 14px;font-size:13px}
+    .item{padding-right:96px}
+    .item .tiny-note{font-size:9px}
+  }
+</style>
+</head>
+<body>
+
+<div class="woodbar">
+  <div class="inner">
+    <div>柳巷食堂 · 青山市青河区育才路后巷 12 号</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="menu.html">菜单</a>
+      <a href="promo.html">优惠</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🍲</div>
+    <div class="title-block">
+      <h1>柳巷食堂</h1>
+      <div class="sub">LIUXIANG SHITANG</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="inner">
+    <a href="index.html">首页</a>
+    <a href="menu.html" class="active">菜单</a>
+    <a href="promo.html">优惠活动</a>
+    <a href="contact.html">联系我们</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">首页</a> &gt; 菜单</div>
+
+  <div class="head-title">
+    <h2>菜 单</h2>
+    <div class="sub">MENU</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="cat">
+    <h3>川菜 · 热炒</h3>
+    <div class="item">
+      <span class="item-name">水煮鱼</span>
+      <span class="item-desc">现杀草鱼，秘制红油</span>
+      <span class="item-dots"></span>
+      <span class="item-price">68</span>
+    </div>
+    <div class="item">
+      <span class="item-name">毛血旺</span>
+      <span class="item-desc">鸭血、毛肚、黄喉，麻辣浓香</span>
+      <span class="item-dots"></span>
+      <span class="item-price">48</span>
+    </div>
+    <div class="item">
+      <span class="item-name">辣子鸡</span>
+      <span class="item-desc">干辣椒爆炒，鸡丁外酥里嫩</span>
+      <span class="item-dots"></span>
+      <span class="item-price">42</span>
+    </div>
+    <div class="item">
+      <span class="item-name">回锅肉</span>
+      <span class="item-desc">二刀肉，郫县豆瓣</span>
+      <span class="item-dots"></span>
+      <span class="item-price">38</span>
+    </div>
+    <div class="item">
+      <span class="item-name">麻婆豆腐</span>
+      <span class="item-desc">嫩豆腐，牛肉末，花椒提香</span>
+      <span class="item-dots"></span>
+      <span class="item-price">22</span>
+    </div>
+  </div>
+
+  <div class="cat">
+    <h3>烧烤 · 炭火</h3>
+    <div class="item">
+      <span class="item-name">羊肉串</span>
+      <span class="item-desc">内蒙羔羊后腿，现穿现烤</span>
+      <span class="item-dots"></span>
+      <span class="item-price">5</span>
+    </div>
+    <div class="item">
+      <span class="item-name">烤鸡翅</span>
+      <span class="item-desc">奥尔良 / 蜜汁 / 麻辣</span>
+      <span class="item-dots"></span>
+      <span class="item-price">8</span>
+    </div>
+    <div class="item">
+      <span class="item-name">烤五花肉</span>
+      <span class="item-desc">厚切，配生菜和蘸料</span>
+      <span class="item-dots"></span>
+      <span class="item-price">10</span>
+    </div>
+    <div class="item">
+      <span class="item-name">烤茄子</span>
+      <span class="item-desc">蒜蓉、小米辣</span>
+      <span class="item-dots"></span>
+      <span class="item-price">12</span>
+    </div>
+    <div class="item">
+      <span class="item-name">烤韭菜</span>
+      <span class="item-desc">秘制酱汁</span>
+      <span class="item-dots"></span>
+      <span class="item-price">6</span>
+      <span class="tiny-note">03. YWdlcy5kZXYv</span>
+    </div>
+  </div>
+
+  <div class="cat">
+    <h3>面食 · 主食</h3>
+    <div class="item">
+      <span class="item-name">担担面</span>
+      <span class="item-desc">老成都方子，芝麻酱香浓厚</span>
+      <span class="item-dots"></span>
+      <span class="item-price">15</span>
+    </div>
+    <div class="item">
+      <span class="item-name">酸辣粉</span>
+      <span class="item-desc">手工红薯粉，酸辣开胃</span>
+      <span class="item-dots"></span>
+      <span class="item-price">12</span>
+    </div>
+    <div class="item">
+      <span class="item-name">蛋炒饭</span>
+      <span class="item-desc">粒粒分明，锅气十足</span>
+      <span class="item-dots"></span>
+      <span class="item-price">12</span>
+    </div>
+  </div>
+
+  <div class="cat">
+    <h3>饮品 · 甜品</h3>
+    <div class="item">
+      <span class="item-name">冰粉</span>
+      <span class="item-desc">红糖、山楂、葡萄干</span>
+      <span class="item-dots"></span>
+      <span class="item-price">8</span>
+    </div>
+    <div class="item">
+      <span class="item-name">酸梅汤</span>
+      <span class="item-desc">自制，冰镇</span>
+      <span class="item-dots"></span>
+      <span class="item-price">6</span>
+    </div>
+    <div class="item">
+      <span class="item-name">雪花啤酒</span>
+      <span class="item-desc">冰柜现取</span>
+      <span class="item-dots"></span>
+      <span class="item-price">8</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="menu.html">菜单</a>
+      <a href="promo.html">优惠活动</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+    <div>© 2012-2026 柳巷食堂 · 青山市青河区 &nbsp;|&nbsp; 本站为虚构设定</div>
+  </div>
+</footer>
+
+</body>
+</html>

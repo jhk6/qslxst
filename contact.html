@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>联系我们 · 柳巷食堂</title>
+<style>
+  :root{
+    --wood:#3a1d0f;--wood2:#5a2e14;--red:#a8331f;--red2:#c94a2a;
+    --gold:#d4a24a;--gold2:#f0c878;--cream:#f6ecd9;--ink:#2a1810;--muted:#8a7156;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--cream);color:var(--ink);line-height:1.7;font-size:14px}
+  a{color:inherit;text-decoration:none}
+
+  .woodbar{background:linear-gradient(180deg,var(--wood),var(--wood2));
+    color:var(--gold2);font-size:12px;padding:6px 0;border-bottom:2px solid var(--gold)}
+  .woodbar .inner{max-width:1140px;margin:0 auto;padding:0 20px;
+    display:flex;justify-content:space-between;align-items:center}
+  .woodbar a{color:var(--gold2);margin-left:16px;transition:.2s}
+  .woodbar a:hover{color:#fff}
+
+  header{background:
+      radial-gradient(ellipse at 20% -20%, rgba(201,74,42,.35), transparent 60%),
+      linear-gradient(135deg,#5a2e14 0%,#3a1d0f 60%,#2a1810 100%);
+    color:var(--cream);padding:26px 0 22px;
+    border-bottom:3px solid var(--gold);position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(212,162,74,.08) 1px,transparent 1px);
+    background-size:18px 18px;pointer-events:none}
+  .header-inner{max-width:1140px;margin:0 auto;padding:0 20px;
+    display:flex;align-items:center;gap:18px;position:relative;z-index:2}
+  .logo{width:56px;height:56px;flex-shrink:0;border-radius:50%;
+    background:radial-gradient(circle at 50% 40%,var(--gold2),var(--gold) 60%,#8a6a20 100%);
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+    box-shadow:0 0 0 3px rgba(212,162,74,.18)}
+  .title-block h1{font-family:"Songti SC","STSong",serif;
+    font-size:26px;letter-spacing:5px;color:#fff}
+  .title-block .sub{font-size:11px;letter-spacing:3px;color:var(--gold2);margin-top:4px}
+
+  nav{background:var(--wood);border-bottom:1px solid rgba(212,162,74,.2);
+    position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+  nav .inner{max-width:1140px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap}
+  nav a{color:rgba(246,236,217,.8);padding:16px 28px;font-size:15px;position:relative;transition:.2s;letter-spacing:1px}
+  nav a:hover{background:var(--wood2);color:#fff}
+  nav a.active{color:var(--gold2);font-weight:600}
+  nav a.active::after{content:"";position:absolute;left:28px;right:28px;bottom:0;height:3px;background:var(--gold)}
+
+  .wrap{max-width:900px;margin:0 auto;padding:40px 20px 60px}
+  .crumb{font-size:12px;color:var(--muted);margin-bottom:20px}
+  .crumb a:hover{color:var(--red)}
+
+  .head-title{text-align:center;margin-bottom:40px}
+  .head-title h2{font-family:"Songti SC","STSong",serif;font-size:32px;
+    letter-spacing:12px;color:var(--ink);text-indent:12px}
+  .head-title .sub{margin-top:10px;font-size:12px;letter-spacing:6px;color:var(--muted)}
+  .head-title .line{width:60px;height:2px;background:var(--gold);margin:16px auto 0}
+
+  .info-card{
+    background:#fff;border-radius:8px;padding:34px 38px;
+    box-shadow:0 6px 24px -14px rgba(58,29,15,.4);
+    border-top:4px solid var(--gold);
+  }
+
+  .info-row{
+    display:flex;align-items:flex-start;gap:16px;
+    padding:16px 0;border-bottom:1px dashed rgba(138,113,86,.25);
+  }
+  .info-row:last-child{border-bottom:none}
+  .info-row .ico{
+    width:38px;height:38px;flex-shrink:0;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold2),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;color:#fff;
+  }
+  .info-row .body{flex:1}
+  .info-row .k{font-size:12px;color:var(--muted);letter-spacing:3px;margin-bottom:4px}
+  .info-row .v{font-size:15px;color:var(--ink);line-height:1.8}
+  .info-row .v strong{color:var(--red)}
+
+  /* ★ base64 段 04 专用样式 */
+  .tiny-note{
+    font-family:Consolas,"Courier New",monospace;
+    font-size:10.5px;color:#b89a5a;letter-spacing:1px;
+    opacity:.65;user-select:all;margin-top:6px;display:block;
+  }
+
+  .map-box{
+    margin-top:28px;aspect-ratio:16/9;border-radius:6px;
+    background:
+      radial-gradient(ellipse at 40% 50%,rgba(201,74,42,.3),transparent 65%),
+      linear-gradient(135deg,#8a6a20,#5a2e14);
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(240,200,120,.6);font-size:60px;
+    position:relative;overflow:hidden;
+    box-shadow:0 10px 30px -14px rgba(58,29,15,.5);
+  }
+  .map-box::after{
+    content:"📍 育才路后巷 12 号";position:absolute;bottom:14px;left:20px;
+    font-size:13px;color:#fff;letter-spacing:2px;
+    background:rgba(58,29,15,.8);padding:6px 14px;border-radius:3px;
+    font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  }
+
+  footer{background:var(--wood);color:rgba(246,236,217,.55);
+    font-size:12px;padding:30px 0 22px;border-top:3px solid var(--gold);margin-top:20px}
+  .footer-inner{max-width:1140px;margin:0 auto;padding:0 20px;text-align:center;line-height:2}
+  .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+  .footer-links a{color:rgba(246,236,217,.55)}
+  .footer-links a:hover{color:var(--gold2)}
+
+  @media (max-width:520px){
+    .head-title h2{font-size:24px;letter-spacing:6px;text-indent:6px}
+    .info-card{padding:22px 22px}
+    nav a{padding:14px 14px;font-size:13px}
+  }
+</style>
+</head>
+<body>
+
+<div class="woodbar">
+  <div class="inner">
+    <div>柳巷食堂 · 青山市青河区育才路后巷 12 号</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="menu.html">菜单</a>
+      <a href="promo.html">优惠</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🍲</div>
+    <div class="title-block">
+      <h1>柳巷食堂</h1>
+      <div class="sub">LIUXIANG SHITANG</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="inner">
+    <a href="index.html">首页</a>
+    <a href="menu.html">菜单</a>
+    <a href="promo.html">优惠活动</a>
+    <a href="contact.html" class="active">联系我们</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">首页</a> &gt; 联系我们</div>
+
+  <div class="head-title">
+    <h2>联系我们</h2>
+    <div class="sub">CONTACT US</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="info-card">
+    <div class="info-row">
+      <div class="ico">📍</div>
+      <div class="body">
+        <div class="k">门 店 地 址</div>
+        <div class="v">青山市青河区育才路后巷 12 号<br>（青山市实验中学后门向东 50 米）</div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="ico">📞</div>
+      <div class="body">
+        <div class="k">订 餐 电 话</div>
+        <div class="v"><strong>0571-8888 6666</strong></div>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="ico">🕐</div>
+      <div class="body">
+        <div class="k">营 业 时 间</div>
+        <div class="v">每日 11:00 — 次日 02:00</div>
+        <span class="tiny-note">04.cmVjb3JkLmh0bWw</span>
+      </div>
+    </div>
+
+    <div class="info-row">
+      <div class="ico">💬</div>
+      <div class="body">
+        <div class="k">微 信 公 众 号</div>
+        <div class="v">青山宝藏美食<br>回复"探店"获取完整美食地图</div>
+      </div>
+    </div>
+
+    <div class="map-box">🗺️</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="menu.html">菜单</a>
+      <a href="promo.html">优惠活动</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+    <div>© 2012-2026 柳巷食堂 · 青山市青河区 &nbsp;|&nbsp; 本站为虚构设定</div>
+  </div>
+</footer>
+
+</body>
+</html>

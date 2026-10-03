@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>优惠活动 · 柳巷食堂</title>
+<style>
+  :root{
+    --wood:#3a1d0f;--wood2:#5a2e14;--red:#a8331f;--red2:#c94a2a;
+    --gold:#d4a24a;--gold2:#f0c878;--cream:#f6ecd9;--ink:#2a1810;--muted:#8a7156;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--cream);color:var(--ink);line-height:1.7;font-size:14px}
+  a{color:inherit;text-decoration:none}
+
+  .woodbar{background:linear-gradient(180deg,var(--wood),var(--wood2));
+    color:var(--gold2);font-size:12px;padding:6px 0;border-bottom:2px solid var(--gold)}
+  .woodbar .inner{max-width:1140px;margin:0 auto;padding:0 20px;
+    display:flex;justify-content:space-between;align-items:center}
+  .woodbar a{color:var(--gold2);margin-left:16px;transition:.2s}
+  .woodbar a:hover{color:#fff}
+
+  header{background:
+      radial-gradient(ellipse at 20% -20%, rgba(201,74,42,.35), transparent 60%),
+      linear-gradient(135deg,#5a2e14 0%,#3a1d0f 60%,#2a1810 100%);
+    color:var(--cream);padding:26px 0 22px;
+    border-bottom:3px solid var(--gold);position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;inset:0;
+    background-image:radial-gradient(rgba(212,162,74,.08) 1px,transparent 1px);
+    background-size:18px 18px;pointer-events:none}
+  .header-inner{max-width:1140px;margin:0 auto;padding:0 20px;
+    display:flex;align-items:center;gap:18px;position:relative;z-index:2}
+  .logo{width:56px;height:56px;flex-shrink:0;border-radius:50%;
+    background:radial-gradient(circle at 50% 40%,var(--gold2),var(--gold) 60%,#8a6a20 100%);
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+    box-shadow:0 0 0 3px rgba(212,162,74,.18)}
+  .title-block h1{font-family:"Songti SC","STSong",serif;
+    font-size:26px;letter-spacing:5px;color:#fff}
+  .title-block .sub{font-size:11px;letter-spacing:3px;color:var(--gold2);margin-top:4px}
+
+  nav{background:var(--wood);border-bottom:1px solid rgba(212,162,74,.2);
+    position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+  nav .inner{max-width:1140px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap}
+  nav a{color:rgba(246,236,217,.8);padding:16px 28px;font-size:15px;position:relative;transition:.2s;letter-spacing:1px}
+  nav a:hover{background:var(--wood2);color:#fff}
+  nav a.active{color:var(--gold2);font-weight:600}
+  nav a.active::after{content:"";position:absolute;left:28px;right:28px;bottom:0;height:3px;background:var(--gold)}
+
+  .wrap{max-width:1000px;margin:0 auto;padding:40px 20px 60px}
+  .crumb{font-size:12px;color:var(--muted);margin-bottom:20px}
+  .crumb a:hover{color:var(--red)}
+
+  .head-title{text-align:center;margin-bottom:40px}
+  .head-title h2{font-family:"Songti SC","STSong",serif;font-size:32px;
+    letter-spacing:12px;color:var(--ink);text-indent:12px}
+  .head-title .sub{margin-top:10px;font-size:12px;letter-spacing:6px;color:var(--muted)}
+  .head-title .line{width:60px;height:2px;background:var(--gold);margin:16px auto 0}
+
+  .promo-card{
+    background:#fff;border-radius:8px;padding:32px 36px;margin-bottom:24px;
+    box-shadow:0 6px 24px -14px rgba(58,29,15,.4);
+    position:relative;overflow:hidden;
+    border-top:4px solid var(--red);
+  }
+  .promo-card::after{
+    content:"";position:absolute;right:-40px;top:-40px;
+    width:160px;height:160px;border-radius:50%;
+    background:radial-gradient(circle,rgba(212,162,74,.15),transparent 70%);
+  }
+  .promo-card .tag{
+    display:inline-block;background:var(--red);color:#fff;
+    font-size:11px;padding:3px 12px;border-radius:2px;letter-spacing:2px;
+    margin-bottom:14px;
+  }
+  .promo-card h3{font-size:22px;color:var(--ink);margin-bottom:12px;letter-spacing:2px;
+    font-family:"Songti SC","STSong",serif}
+  .promo-card p{color:var(--muted);font-size:14px;line-height:2;margin-bottom:14px}
+  .promo-card .rule{
+    padding:16px 20px;background:rgba(246,236,217,.5);
+    border-left:3px solid var(--gold);border-radius:3px;
+    font-size:13px;color:#5a4226;line-height:2;
+  }
+  .promo-card .rule strong{color:var(--red)}
+
+  footer{background:var(--wood);color:rgba(246,236,217,.55);
+    font-size:12px;padding:30px 0 22px;border-top:3px solid var(--gold);margin-top:20px}
+  .footer-inner{max-width:1140px;margin:0 auto;padding:0 20px;text-align:center;line-height:2}
+  .footer-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+  .footer-links a{color:rgba(246,236,217,.55)}
+  .footer-links a:hover{color:var(--gold2)}
+
+  @media (max-width:520px){
+    .head-title h2{font-size:24px;letter-spacing:6px;text-indent:6px}
+    .promo-card{padding:22px 22px}
+    nav a{padding:14px 14px;font-size:13px}
+  }
+</style>
+</head>
+<body>
+
+<div class="woodbar">
+  <div class="inner">
+    <div>柳巷食堂 · 青山市青河区育才路后巷 12 号</div>
+    <div>
+      <a href="index.html">首页</a>
+      <a href="menu.html">菜单</a>
+      <a href="promo.html">优惠</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🍲</div>
+    <div class="title-block">
+      <h1>柳巷食堂</h1>
+      <div class="sub">LIUXIANG SHITANG</div>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="inner">
+    <a href="index.html">首页</a>
+    <a href="menu.html">菜单</a>
+    <a href="promo.html" class="active">优惠活动</a>
+    <a href="contact.html">联系我们</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="crumb"><a href="index.html">首页</a> &gt; 优惠活动</div>
+
+  <div class="head-title">
+    <h2>优惠活动</h2>
+    <div class="sub">PROMOTIONS</div>
+    <div class="line"></div>
+  </div>
+
+  <div class="promo-card">
+    <span class="tag">学生专享</span>
+    <h3>凭学生证 · 全场 8.8 折</h3>
+    <p>青山市实验中学在校学生，凭本人学生证到店消费，全场菜品享 8.8 折优惠（酒水、烧烤除外）。</p>
+    <div class="rule">
+      <strong>活动规则：</strong><br>
+      · 仅限堂食，不与其他优惠同享<br>
+      · 每桌限用一次，需出示本人学生证<br>
+      · 活动长期有效
+    </div>
+  </div>
+
+  <div class="promo-card">
+    <span class="tag">深夜档</span>
+    <h3>22:00 后 · 啤酒买二送一</h3>
+    <p>晚自习下课后来店里坐坐，雪花啤酒买二送一，配烤串最合适不过。</p>
+    <div class="rule">
+      <strong>活动规则：</strong><br>
+      · 每晚 22:00 — 02:00<br>
+      · 仅限堂食<br>
+      · 每人每日限享一次
+    </div>
+  </div>
+
+  <div class="promo-card">
+    <span class="tag">新客礼</span>
+    <h3>首次到店 · 送招牌冰粉一份</h3>
+    <p>第一次来柳巷食堂？只要说是从公众号【青山宝藏美食】看到的，就送一份招牌红糖冰粉。</p>
+    <div class="rule">
+      <strong>活动规则：</strong><br>
+      · 每桌限送一份<br>
+      · 需出示公众号关注页面<br>
+      · 与"学生专享"可叠加
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="menu.html">菜单</a>
+      <a href="promo.html">优惠活动</a>
+      <a href="contact.html">联系我们</a>
+    </div>
+    <div>© 2012-2026 柳巷食堂 · 青山市青河区 &nbsp;|&nbsp; 本站为虚构设定</div>
+  </div>
+</footer>
+
+</body>
+</html>
