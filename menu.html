@@ -63,21 +63,18 @@
     margin-bottom:20px;display:flex;align-items:center;gap:12px}
   .cat h3::before{content:"";width:6px;height:20px;background:var(--red);border-radius:2px}
 
-  /* ===== 菜品行 ===== */
   .item{
     display:flex;align-items:baseline;
     padding:14px 4px;
     border-bottom:1px dashed rgba(138,113,86,.25);
     gap:12px;
     position:relative;
-    padding-right:130px;   /* 给最右侧 base64 留空 */
+    padding-right:130px;
   }
   .item:last-child{border-bottom:none}
   .item-name{font-size:15.5px;color:var(--ink);font-weight:600;flex-shrink:0}
   .item-desc{font-size:13px;color:var(--muted);flex:1;padding-left:8px}
   .item-dots{flex:1;border-bottom:1px dotted rgba(138,113,86,.4);margin:0 6px;transform:translateY(-3px)}
-
-  /* 价格严格右对齐 */
   .item-price{
     font-family:Consolas,monospace;font-size:16px;
     color:var(--red);font-weight:700;flex-shrink:0;
@@ -85,7 +82,6 @@
   }
   .item-price::before{content:"¥";font-size:13px;margin-right:2px}
 
-  /* ===== base64 段 03 · 隐蔽样式 ===== */
   .item .tiny-note{
     position:absolute;
     right:4px;
@@ -93,16 +89,47 @@
     transform:translateY(-50%);
     font-family:Consolas,"Courier New",monospace;
     font-size:10px;
-    color:#c9b48a;         /* 更浅的金 */
+    color:#c9b48a;
     letter-spacing:1px;
-    opacity:.42;            /* 更淡 */
+    opacity:.42;
     user-select:all;
     transition:opacity .3s ease;
-    pointer-events:auto;
   }
-  .item .tiny-note:hover{
-    opacity:.9;
-    color:#b89a5a;
+  .item .tiny-note:hover{opacity:.9;color:#b89a5a}
+
+  /* 老板手记 */
+  .owner-note{
+    max-width:640px;margin:0 auto;
+    background:#fdfaf0;
+    border:1px dashed #d4a24a;
+    border-radius:6px;
+    padding:28px 32px;
+    font-family:"Kaiti SC","KaiTi",cursive,serif;
+    font-size:16px;
+    line-height:2.2;
+    color:#5a4226;
+    position:relative;
+  }
+  .owner-note::before{
+    content:"老板手记";
+    position:absolute;
+    top:-13px;
+    left:22px;
+    background:#f6ecd9;
+    padding:0 10px;
+    font-size:12px;
+    color:#b8860b;
+    letter-spacing:3px;
+    font-family:"Microsoft YaHei",sans-serif;
+    font-weight:600;
+  }
+  .owner-note p{text-indent:2em;margin-bottom:14px}
+  .owner-note p:last-of-type{margin-bottom:0}
+  .owner-note .sign{
+    text-align:right;
+    font-style:italic;
+    margin-top:20px;
+    text-indent:0;
   }
 
   footer{background:var(--wood);color:rgba(246,236,217,.55);
@@ -274,6 +301,18 @@
       <span class="item-price">8</span>
     </div>
   </div>
+
+  <!-- 老板手记 -->
+  <div class="owner-note" style="margin-top:60px;">
+    <p>最近总觉得后巷不太对劲。</p>
+    <p>有几个学生总是在深夜出现，坐在角落里，话不多，点一锅水煮鱼能坐两三个小时。</p>
+    <p>其中一个以前常来，是个挺安静的男孩，总是坐在靠窗那个位置。最近一个多月没见了。</p>
+    <p>不知道是不是我多心了。</p>
+    <div class="sign">
+      —— 老陈<br>
+      2026.09.24
+    </div>
+  </div>
 </div>
 
 <footer>
@@ -287,6 +326,17 @@
     <div>© 2012-2026 柳巷食堂 · 青山市青河区 &nbsp;|&nbsp; 本站为虚构设定</div>
   </div>
 </footer>
+
+<!-- 埋点 -->
+<script>
+(function(){
+  try{
+    var all = JSON.parse(localStorage.getItem('qs_clues') || '{}');
+    all['visited_menu'] = 1;
+    localStorage.setItem('qs_clues', JSON.stringify(all));
+  }catch(e){}
+})();
+</script>
 
 </body>
 </html>

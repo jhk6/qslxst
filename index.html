@@ -17,7 +17,6 @@
   }
   a{color:inherit;text-decoration:none}
 
-  /* 顶部木纹条 */
   .woodbar{
     background:linear-gradient(180deg,var(--wood),var(--wood2));
     color:var(--gold2); font-size:12px; padding:6px 0;
@@ -28,7 +27,6 @@
   .woodbar a{color:var(--gold2);margin-left:16px;transition:.2s}
   .woodbar a:hover{color:#fff}
 
-  /* 页头 */
   header{
     background:
       radial-gradient(ellipse at 20% -20%, rgba(201,74,42,.35), transparent 60%),
@@ -68,7 +66,6 @@
   .header-info{margin-left:auto;text-align:right;font-size:12px;color:rgba(246,236,217,.75);line-height:2;position:relative;z-index:2}
   .header-info strong{color:var(--gold2);font-size:16px;letter-spacing:1px}
 
-  /* 导航 */
   nav{background:var(--wood);border-bottom:1px solid rgba(212,162,74,.2);position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.15)}
   nav .inner{max-width:1140px;margin:0 auto;padding:0 20px;display:flex;flex-wrap:wrap}
   nav a{color:rgba(246,236,217,.8);padding:16px 28px;font-size:15px;position:relative;transition:.2s;letter-spacing:1px}
@@ -76,7 +73,6 @@
   nav a.active{color:var(--gold2);font-weight:600}
   nav a.active::after{content:"";position:absolute;left:28px;right:28px;bottom:0;height:3px;background:var(--gold)}
 
-  /* 主图区 */
   .hero{
     background:linear-gradient(135deg,#f6ecd9 0%,#eadfc8 100%);
     padding:56px 0;
@@ -109,7 +105,6 @@
   }
   .btn.ghost:hover{background:var(--red);color:#fff}
 
-  /* ===== Hero 大图 ===== */
   .hero-img{
     aspect-ratio:4/3;border-radius:6px;
     background:linear-gradient(135deg,#8a3a20,#3a1d0f);
@@ -131,7 +126,6 @@
     z-index:2;
   }
 
-  /* 特色 */
   .section{max-width:1140px;margin:0 auto;padding:56px 20px}
   .section-title{text-align:center;margin-bottom:36px}
   .section-title h2{
@@ -154,8 +148,6 @@
     transition:.25s;
   }
   .dish:hover{transform:translateY(-4px);box-shadow:0 10px 30px -12px rgba(58,29,15,.5)}
-
-  /* 菜品图片 */
   .dish-img{
     aspect-ratio:4/3;
     position:relative;
@@ -169,11 +161,8 @@
     object-fit:cover;
     transition:transform .5s ease;
   }
-  .dish:hover .dish-img img{
-    transform:scale(1.05);
-  }
+  .dish:hover .dish-img img{transform:scale(1.05)}
 
-  /* 兜底底色 */
   .dish:nth-child(1) .dish-img{background:linear-gradient(135deg,#c94a2a,#8a2010)}
   .dish:nth-child(2) .dish-img{background:linear-gradient(135deg,#8a6a20,#5a4210)}
   .dish:nth-child(3) .dish-img{background:linear-gradient(135deg,#a8331f,#5a1810)}
@@ -184,7 +173,47 @@
   .dish-body .price{font-size:18px;color:var(--red);font-weight:700}
   .dish-body .price small{font-size:12px;color:var(--muted);font-weight:400}
 
-  /* 信息 */
+  /* 食客留言 */
+  .guestbook-section{
+    background:linear-gradient(180deg,#f6ecd9 0%,#eadfc8 100%);
+    padding:56px 0;
+  }
+  .guestbook-inner{max-width:800px;margin:0 auto;padding:0 20px}
+  .guestbook-list{display:flex;flex-direction:column;gap:16px}
+  .guest-item{
+    background:#fff;
+    border-radius:8px;
+    padding:18px 22px;
+    box-shadow:0 2px 14px -8px rgba(58,29,15,.25);
+    border-left:3px solid var(--gold);
+    position:relative;
+  }
+  .guest-item::before{
+    content:"❝";
+    position:absolute;
+    top:10px;right:18px;
+    font-size:34px;
+    color:rgba(212,162,74,.18);
+    font-family:Georgia,serif;
+    line-height:1;
+  }
+  .guest-head{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:10px;
+    font-size:12px;
+    color:var(--muted);
+  }
+  .guest-avatar{
+    width:26px;height:26px;border-radius:50%;
+    background:linear-gradient(135deg,var(--gold2),var(--gold));
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-size:11px;font-weight:700;
+    flex-shrink:0;
+  }
+  .guest-name{font-weight:600;color:#5a4226;letter-spacing:.5px}
+  .guest-time{color:#b09a72;font-family:Consolas,monospace;font-size:11.5px;margin-left:auto}
+  .guest-body{font-size:14px;color:#4a3620;line-height:2;padding-left:36px}
+
   .info-strip{
     background:linear-gradient(180deg,var(--wood),var(--wood2));
     color:var(--cream); padding:32px 0;
@@ -195,7 +224,6 @@
   .info-item .k{font-size:12px;letter-spacing:3px;color:var(--gold2);margin-bottom:6px}
   .info-item .v{font-size:15px;color:#fff}
 
-  /* 页脚 */
   footer{
     background:var(--wood);color:rgba(246,236,217,.55);
     font-size:12px;padding:30px 0 22px;border-top:3px solid var(--gold);
@@ -216,6 +244,7 @@
   }
   @media (max-width:520px){
     .dish-grid{grid-template-columns:1fr}
+    .guest-body{padding-left:0}
   }
 </style>
 </head>
@@ -318,6 +347,53 @@
   </div>
 </div>
 
+<!-- 食客留言 -->
+<div class="guestbook-section">
+  <div class="guestbook-inner">
+    <div class="section-title">
+      <h2>食客留言</h2>
+      <p>GUEST MESSAGES</p>
+    </div>
+
+    <div class="guestbook-list">
+
+      <div class="guest-item">
+        <div class="guest-head">
+          <div class="guest-avatar">匿</div>
+          <span class="guest-name">匿名的客人</span>
+          <span class="guest-time">2026-09-22 23:47</span>
+        </div>
+        <div class="guest-body">
+          今晚来吃饭，看到后门巷子里有三个学生模样的人，看起来很紧张，其中一个还在哭。没敢多看，吃完饭就走了。
+        </div>
+      </div>
+
+      <div class="guest-item">
+        <div class="guest-head">
+          <div class="guest-avatar">匿</div>
+          <span class="guest-name">匿名的客人</span>
+          <span class="guest-time">2026-09-23 02:15</span>
+        </div>
+        <div class="guest-body">
+          凌晨路过育才路，看到实验中学仓库那边好像有手电筒的光。当时没在意，现在想想挺奇怪的。
+        </div>
+      </div>
+
+      <div class="guest-item">
+        <div class="guest-head">
+          <div class="guest-avatar">匿</div>
+          <span class="guest-name">匿名的客人</span>
+          <span class="guest-time">2026-09-25 12:30</span>
+        </div>
+        <div class="guest-body">
+          听说实验中学出了事，两个学生都没了。那家店最近也不太平，老板整天皱着眉。菜还是老味道，就是气氛有点压抑。
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <div class="info-strip">
   <div class="info-inner">
     <div class="info-item">
@@ -357,6 +433,17 @@
   document.querySelectorAll('a[href="#"]').forEach(a=>{
     a.addEventListener('click',e=>e.preventDefault());
   });
+</script>
+
+<!-- 埋点 -->
+<script>
+(function(){
+  try{
+    var all = JSON.parse(localStorage.getItem('qs_clues') || '{}');
+    all['visited_restaurant_home'] = 1;
+    localStorage.setItem('qs_clues', JSON.stringify(all));
+  }catch(e){}
+})();
 </script>
 
 </body>
